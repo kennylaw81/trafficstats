@@ -75,3 +75,8 @@ Example:
 
 - All input files must be plain text and use the format above.
 - For custom processing, modify or extend the processor classes in `src/main/java/com/example/`.
+
+## Potential Improvements, I'll park for later
+
+- Resource concerns: If input file could have many lines, then it could be a memory hog if each line is loaded into memory. Consider batch processing and chunking it by day
+- Consider extensibility concerns, like if new functionality needs to be added, what areas would benefit from a refactor?

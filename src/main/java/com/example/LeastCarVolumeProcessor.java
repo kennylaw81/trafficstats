@@ -54,6 +54,7 @@ public class LeastCarVolumeProcessor implements ITrafficStatsProcessor {
                 currentSize--;
             }
 
+            // ASSUMPTION: Only evaluate records where the window is exactly the specified size, not smaller. 
             if (currentSize == windowSize && currentSum < minSum) {
                 minSum = currentSum;
                 bestWindow = new ArrayList<>(stats.subList(left, right + 1));
