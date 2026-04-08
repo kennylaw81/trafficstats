@@ -3,12 +3,12 @@ package com.example;
 /**
  * Interface for processing traffic statistics.
  */
-public interface ITrafficStatsProcessor {
+public interface TrafficStatsProcessor {
 
     /**
      * Processes the traffic statistics.
      */
-    void Process();
+    void process();
 
     /**
      * Gets the output string.

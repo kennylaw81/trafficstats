@@ -19,7 +19,7 @@ public class LeastCarVolumeProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 6, 30), 20)
         );
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 3);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:00:00 5\n2021-12-01T05:30:00 10\n2021-12-01T06:00:00 15";
         assertEquals(expected, processor.getOutput());
     }
@@ -32,7 +32,7 @@ public class LeastCarVolumeProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 7, 0), 15)  // gap
         );
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 3);
-        processor.Process();
+        processor.process();
         String expected = "";
         assertEquals(expected, processor.getOutput());
     }
@@ -44,7 +44,7 @@ public class LeastCarVolumeProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 5, 30), 10)
         );
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 1);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:00:00 5";
         assertEquals(expected, processor.getOutput());
     }
@@ -60,7 +60,7 @@ public class LeastCarVolumeProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 7, 30), 3)
         );
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 3);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:30:00 5\n2021-12-01T06:00:00 1\n2021-12-01T06:30:00 2";
         assertEquals(expected, processor.getOutput());
     }
@@ -69,7 +69,7 @@ public class LeastCarVolumeProcessorTest {
     public void testEmptyStats() {
         List<TrafficStat> stats = new ArrayList<>();
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 3);
-        processor.Process();
+        processor.process();
         String expected = "";
         assertEquals(expected, processor.getOutput());
     }
@@ -83,7 +83,7 @@ public class LeastCarVolumeProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 6, 30), 1)
         );
         LeastCarVolumeProcessor processor = new LeastCarVolumeProcessor(stats, 3);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:30:00 10\n2021-12-01T06:00:00 5\n2021-12-01T06:30:00 1";
         assertEquals(expected, processor.getOutput());
     }

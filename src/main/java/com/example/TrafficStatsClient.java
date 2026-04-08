@@ -1,41 +1,29 @@
 package com.example;
 
-import com.example.repository.ITrafficStatsRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.repository.TrafficStatsRepository;
 
 public class TrafficStatsClient {
-    private ITrafficStatsRepository repository;
+    private TrafficStatsRepository repository;
 
-    public TrafficStatsClient(ITrafficStatsRepository repository) {
+    public TrafficStatsClient(TrafficStatsRepository repository) {
         this.repository = repository;
     }
 
-    public void run() {
-        try {
-            repository.loadTrafficStats();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        
+    public List<TrafficStatsResult> run() throws Exception {
         var stats = repository.getTrafficStats();
+        List<TrafficStatsResult> results = new ArrayList<>();
 
-        CarCountProcessor processor = new CarCountProcessor(stats);
-        processor.Process();
-        System.out.println(processor.getOutput());
+        for (TrafficStatsProcessorDefinition definition : TrafficStatsProcessorRegistry.getDefinitions()) {
+            TrafficStatsProcessor processor = definition.createProcessor(stats);
+            processor.process();
+            results.add(new TrafficStatsResult(definition.getTitle(), processor.getOutput()));
+        }
 
-        System.out.println("The number of cars seen each day :");
-        CarCountPerDayProcessor perDayProcessor = new CarCountPerDayProcessor(stats);
-        perDayProcessor.Process();
-        System.out.println(perDayProcessor.getOutput());
-
-        System.out.println("The top 3 half hours with most cars :");
-        TopCarCountProcessor topCarCountProcessor = new TopCarCountProcessor(stats, 3);
-        topCarCountProcessor.Process();
-        System.out.println(topCarCountProcessor.getOutput());
-
-        System.out.println("The 1.5 hour period with least cars :");
-        LeastCarVolumeProcessor leastCarVolumeProcessor = new LeastCarVolumeProcessor(stats, 3);
-        leastCarVolumeProcessor.Process();
-        System.out.println(leastCarVolumeProcessor.getOutput());
+        return results;
     }
 
 

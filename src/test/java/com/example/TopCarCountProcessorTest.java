@@ -19,7 +19,7 @@ public class TopCarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 6, 30), 20)
         );
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 2);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T06:30:00 20\n2021-12-01T05:30:00 15";
         assertEquals(expected, processor.getOutput());
     }
@@ -31,7 +31,7 @@ public class TopCarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 5, 30), 10)
         );
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 5);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:30:00 10\n2021-12-01T05:00:00 5";
         assertEquals(expected, processor.getOutput());
     }
@@ -44,7 +44,7 @@ public class TopCarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 6, 0), 10)
         );
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 1);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01T05:30:00 15";
         assertEquals(expected, processor.getOutput());
     }
@@ -53,7 +53,7 @@ public class TopCarCountProcessorTest {
     public void testEmptyList() {
         List<TrafficStat> stats = new ArrayList<>();
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 1);
-        processor.Process();
+        processor.process();
         String expected = "";
         assertEquals(expected, processor.getOutput());
     }
@@ -66,7 +66,7 @@ public class TopCarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 7, 0), 5)
         );
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 1);
-        processor.Process();
+        processor.process();
         // Should get the earlier timestamp with count 10
         String expected = "2021-12-01T05:00:00 10";
         assertEquals(expected, processor.getOutput());
@@ -80,7 +80,7 @@ public class TopCarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 7, 0), 5)
         );
         TopCarCountProcessor processor = new TopCarCountProcessor(stats, 2);
-        processor.Process();
+        processor.process();
         // Should get both 10s, in timestamp order
         String expected = "2021-12-01T05:00:00 10\n2021-12-01T06:00:00 10";
         assertEquals(expected, processor.getOutput());

@@ -18,7 +18,7 @@ public class CarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 6, 0), 15)
         );
         CarCountProcessor processor = new CarCountProcessor(stats);
-        processor.Process();
+        processor.process();
         assertEquals("Number of cars seen: 30", processor.getOutput());
     }
 
@@ -29,7 +29,7 @@ public class CarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 5, 30), 0)
         );
         CarCountProcessor processor = new CarCountProcessor(stats);
-        processor.Process();
+        processor.process();
         assertEquals("Number of cars seen: 0", processor.getOutput());
     }
 
@@ -37,7 +37,7 @@ public class CarCountProcessorTest {
     public void testEmptyList() {
         List<TrafficStat> stats = new ArrayList<>();
         CarCountProcessor processor = new CarCountProcessor(stats);
-        processor.Process();
+        processor.process();
         assertEquals("Number of cars seen: 0", processor.getOutput());
     }
 
@@ -47,7 +47,7 @@ public class CarCountProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 5, 0), 7)
         );
         CarCountProcessor processor = new CarCountProcessor(stats);
-        processor.Process();
+        processor.process();
         assertEquals("Number of cars seen: 7", processor.getOutput());
     }
 }

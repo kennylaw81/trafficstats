@@ -9,7 +9,7 @@ import java.util.TreeMap;
 /**
  * Processor that calculates the total number of cars per day.
  */
-public class CarCountPerDayProcessor implements ITrafficStatsProcessor {
+public class CarCountPerDayProcessor implements TrafficStatsProcessor {
 
     private List<TrafficStat> stats;
     private Map<LocalDate, Integer> dailyCounts;
@@ -27,7 +27,8 @@ public class CarCountPerDayProcessor implements ITrafficStatsProcessor {
      * Processes the statistics by summing car counts per day.
      */
     @Override
-    public void Process() {
+    public void process() {
+        dailyCounts.clear();
         for (TrafficStat stat : stats) {
             LocalDate date = stat.getTimestamp().toLocalDate();
             dailyCounts.put(date, dailyCounts.getOrDefault(date, 0) + stat.getCarCount());

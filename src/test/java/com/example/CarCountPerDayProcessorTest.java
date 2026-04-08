@@ -15,7 +15,7 @@ public class CarCountPerDayProcessorTest {
     public void testEmptyList() {
         List<TrafficStat> stats = new ArrayList<>();
         CarCountPerDayProcessor processor = new CarCountPerDayProcessor(stats);
-        processor.Process();
+        processor.process();
         String expected = "";
         assertEquals(expected, processor.getOutput());
     }
@@ -27,7 +27,7 @@ public class CarCountPerDayProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 5, 30), 3)
         );
         CarCountPerDayProcessor processor = new CarCountPerDayProcessor(stats);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01 10";
         assertEquals(expected, processor.getOutput());
     }
@@ -39,7 +39,7 @@ public class CarCountPerDayProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 2, 6, 0), 0)
         );
         CarCountPerDayProcessor processor = new CarCountPerDayProcessor(stats);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01 0\n2021-12-02 0";
         assertEquals(expected, processor.getOutput());
     }
@@ -53,7 +53,7 @@ public class CarCountPerDayProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 2, 6, 30), 5)
         );
         CarCountPerDayProcessor processor = new CarCountPerDayProcessor(stats);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01 15\n2021-12-02 20";
         assertEquals(expected, processor.getOutput());
     }
@@ -66,7 +66,7 @@ public class CarCountPerDayProcessorTest {
             new TrafficStat(LocalDateTime.of(2021, 12, 1, 7, 0), 3)
         );
         CarCountPerDayProcessor processor = new CarCountPerDayProcessor(stats);
-        processor.Process();
+        processor.process();
         String expected = "2021-12-01 6";
         assertEquals(expected, processor.getOutput());
     }

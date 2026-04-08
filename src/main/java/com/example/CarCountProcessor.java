@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Processor that calculates the total number of cars seen.
  */
-public class CarCountProcessor implements ITrafficStatsProcessor {
+public class CarCountProcessor implements TrafficStatsProcessor {
 
     private List<TrafficStat> stats;
     private int numberOfCars;
@@ -23,7 +23,8 @@ public class CarCountProcessor implements ITrafficStatsProcessor {
      * Processes the statistics by summing the car counts.
      */
     @Override
-    public void Process() {
+    public void process() {
+        numberOfCars = 0; // Reset count before processing
         stats.forEach(stat -> numberOfCars += stat.getCarCount()); 
     }
 

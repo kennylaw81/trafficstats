@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Processor that finds the top N timestamps with the highest car counts.
  */
-public class TopCarCountProcessor implements ITrafficStatsProcessor {
+public class TopCarCountProcessor implements TrafficStatsProcessor {
 
     private List<TrafficStat> stats;
     private int topN;
@@ -31,7 +31,7 @@ public class TopCarCountProcessor implements ITrafficStatsProcessor {
      * Processes the statistics by finding the top N entries with highest car counts.
      */
     @Override
-    public void Process() {
+    public void process() {
         topStats = stats.stream()
             .sorted((a, b) -> {
                 int cmp = Integer.compare(b.getCarCount(), a.getCarCount());

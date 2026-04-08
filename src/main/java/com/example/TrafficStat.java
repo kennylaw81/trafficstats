@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class TrafficStat {
 
-    private LocalDateTime timestamp;
-    private int carCount;
+    private final LocalDateTime timestamp;
+    private final int carCount;
 
     /**
      * Constructor for TrafficStat.

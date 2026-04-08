@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Processor that finds the contiguous window of timespans with the least car volume.
  */
-public class LeastCarVolumeProcessor implements ITrafficStatsProcessor {
+public class LeastCarVolumeProcessor implements TrafficStatsProcessor {
 
     private List<TrafficStat> stats;
     private int windowSize;
@@ -31,10 +31,11 @@ public class LeastCarVolumeProcessor implements ITrafficStatsProcessor {
      * Processes the statistics by finding the contiguous window with the least car volume.
      */
     @Override
-    public void Process() {
+    public void process() {
         if (stats.isEmpty()) {
             return;
         }
+        leastWindow.clear(); 
         long minSum = Long.MAX_VALUE;   // Integer overflow is possible if we use int, so use long for sum
         List<TrafficStat> bestWindow = new ArrayList<>();
         long currentSum = 0;

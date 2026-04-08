@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.TrafficStat;
@@ -13,10 +14,9 @@ import com.example.TrafficStat;
 /**
  * Reads a file containing traffic statistics and stores them as a list of TrafficStat objects.
  */
-public class TrafficStatsFileRepository implements ITrafficStatsRepository {
+public class TrafficStatsFileRepository implements TrafficStatsRepository {
 
-    private String filePath;
-    private List<TrafficStat> trafficStats;
+    private final String filePath;
 
     /**
      * Constructor that reads the file and parses the traffic stats.
@@ -24,14 +24,16 @@ public class TrafficStatsFileRepository implements ITrafficStatsRepository {
      */
     public TrafficStatsFileRepository(String filePath) {
         this.filePath = filePath;
-        trafficStats = new ArrayList<>();
     }
 
     /**
-     * Loads the traffic statistics from the file.
+     * Gets the list of traffic stats from the repository.
+     * @return the list of TrafficStat objects
      */
     @Override
-    public void loadTrafficStats() throws IOException{
+    public List<TrafficStat> getTrafficStats() throws IOException{
+        List<TrafficStat> trafficStats = new ArrayList<>();
+
         List<String> lines = Files.readAllLines(Paths.get(filePath));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         
@@ -47,14 +49,6 @@ public class TrafficStatsFileRepository implements ITrafficStatsRepository {
                 }
             }
         }
-    }
-
-    /**
-     * Gets the list of traffic stats.
-     * @return the list of TrafficStat objects
-     */
-    @Override
-    public List<TrafficStat> getTrafficStats() {
-        return trafficStats;
+        return Collections.unmodifiableList(trafficStats);
     }
 }
