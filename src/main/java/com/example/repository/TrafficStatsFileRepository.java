@@ -1,4 +1,4 @@
-package com.example;
+package com.example.repository;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,20 +8,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.TrafficStat;
+
 /**
  * Reads a file containing traffic statistics and stores them as a list of TrafficStat objects.
  */
-public class FileInputReader {
+public class TrafficStatsFileRepository implements ITrafficStatsRepository {
 
+    private String filePath;
     private List<TrafficStat> trafficStats;
 
     /**
      * Constructor that reads the file and parses the traffic stats.
      * @param filePath the path to the input file
-     * @throws IOException if the file cannot be read
      */
-    public FileInputReader(String filePath) throws IOException {
+    public TrafficStatsFileRepository(String filePath) {
+        this.filePath = filePath;
         trafficStats = new ArrayList<>();
+    }
+
+    /**
+     * Loads the traffic statistics from the file.
+     */
+    @Override
+    public void loadTrafficStats() throws IOException{
         List<String> lines = Files.readAllLines(Paths.get(filePath));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         
@@ -43,6 +53,7 @@ public class FileInputReader {
      * Gets the list of traffic stats.
      * @return the list of TrafficStat objects
      */
+    @Override
     public List<TrafficStat> getTrafficStats() {
         return trafficStats;
     }

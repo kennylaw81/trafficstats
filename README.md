@@ -40,7 +40,7 @@ mvn clean compile
    ```
    Example:
    ```
-   java -cp target/classes com.example.TrafficStats src/test/java/com/example/samples/input1.txt
+   mvn
    ```
 
 ## How to Run the Tests
